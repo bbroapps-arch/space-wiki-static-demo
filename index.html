@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#0a101b">
+  <title>Wiki · 업무 자료 지도 · Space</title>
+  <link rel="stylesheet" href="./styles.css">
+  <link rel="stylesheet" href="./space-theme.css">
+  <link rel="stylesheet" href="./space-readability.css">
+  <script type="importmap">
+    {"imports":{"three":"./vendor/three.module.js","three/addons/":"./vendor/"}}
+  </script>
+</head>
+<body class="wiki-page">
+  <svg class="icon-library" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <symbol id="i-orbit" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><ellipse cx="12" cy="12" rx="10" ry="5" transform="rotate(-38 12 12)"/></symbol>
+    <symbol id="i-grid" viewBox="0 0 24 24"><rect x="4" y="4" width="6" height="6" rx="1.4"/><rect x="14" y="4" width="6" height="6" rx="1.4"/><rect x="4" y="14" width="6" height="6" rx="1.4"/><rect x="14" y="14" width="6" height="6" rx="1.4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path d="M12 5c-3-2-6-2-9-1v15c3-1 6-1 9 1 3-2 6-2 9-1V4c-3-1-6-1-9 1Z"/><path d="M12 5v15"/></symbol>
+    <symbol id="i-reset" viewBox="0 0 24 24"><path d="M4 10a8 8 0 1 1 1 8M4 4v6h6"/></symbol>
+    <symbol id="i-expand" viewBox="0 0 24 24"><path d="M8 3H3v5M16 3h5v5M21 16v5h-5M8 21H3v-5"/></symbol>
+    <symbol id="i-tune" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/><circle cx="9" cy="6" r="2"/><circle cx="16" cy="12" r="2"/><circle cx="8" cy="18" r="2"/></symbol>
+    <symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path d="m8 5 11 7-11 7Z"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
+    <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.5 9a2.5 2.5 0 0 1 5 0c0 2-2.5 2-2.5 4M12 16h.01"/></symbol>
+    <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="7"/><path d="M12 2v5M12 17v5M2 12h5M17 12h5"/></symbol>
+  </svg>
+
+  <aside class="rail space-sidebar" id="space-sidebar" aria-label="공간과 자료 메뉴">
+    <nav class="sidebar-services" aria-label="공간 선택">
+      <a class="space-service" href="./index.html" data-space-link="wiki" aria-current="page" aria-label="Wiki" title="Wiki · 자료를 찾고 연결하기"><svg><use href="#i-book"/></svg><span><strong>Wiki</strong><small>자료를 찾고 연결하기</small></span></a>
+    </nav>
+    <div class="sidebar-body">
+      <div class="sidebar-group" role="group" aria-label="자료 탐색">
+        <h2 class="sidebar-heading">자료 탐색</h2>
+        <button class="space-menu-item active" id="universe-button" data-filter="all" title="전체 자료 보기" aria-label="전체 자료 보기" aria-pressed="true"><svg><use href="#i-orbit"/></svg><span>전체 자료</span></button>
+        <button class="space-menu-item" id="project-button" data-filter="projects" title="프로젝트만 보기" aria-label="프로젝트만 보기" aria-pressed="false"><svg><use href="#i-grid"/></svg><span>프로젝트</span></button>
+        <button class="space-menu-item" id="note-button" data-filter="notes" title="문서만 보기" aria-label="문서만 보기" aria-pressed="false"><svg><use href="#i-book"/></svg><span>문서</span></button>
+      </div>
+      <p class="sidebar-hint">행성은 프로젝트,<br>작은 별은 문서입니다.</p>
+    </div>
+    <div class="sidebar-footer"><button class="space-menu-item" id="help-button" title="이용 안내" aria-label="이용 안내"><svg><use href="#i-help"/></svg><span>이용 안내</span></button></div>
+  </aside>
+  <button class="sidebar-scrim" id="sidebar-scrim" aria-label="펼친 메뉴 닫기" tabindex="-1" hidden></button>
+
+  <main class="workspace">
+    <header class="header space-header">
+      <button class="sidebar-toggle" id="sidebar-toggle" title="사이드바 접기" aria-label="사이드바 접기" aria-expanded="true" aria-controls="space-sidebar"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M9 4v16m6-11-3 3 3 3"/></svg></button>
+      <a class="space-brand" href="./index.html" data-space-link="wiki" aria-label="Space 홈">space<span>.</span></a>
+      <span class="header-service">Wiki</span>
+      <div class="header-divider"></div><h1 class="space-context">업무 자료 지도 <span class="version">3D</span></h1>
+      <div class="header-actions"><span class="sample-badge"><span></span>샘플 공간</span><button class="icon-button" id="reset-button" title="처음 위치로" aria-label="처음 위치로"><svg><use href="#i-reset"/></svg></button><button class="icon-button" id="fullscreen-button" title="전체 화면" aria-label="전체 화면"><svg><use href="#i-expand"/></svg></button></div>
+    </header>
+    <div class="toolbar">
+      <div class="map-location"><svg><use href="#i-orbit"/></svg>자료 지도<span>/</span><strong id="map-filter-label">전체 자료</strong></div>
+      <div class="summary"><span><i class="dot project-dot"></i><b id="project-count">14</b> 프로젝트</span><span><i class="dot note-dot"></i><b id="note-count">1,800</b> 문서 점</span><span class="connection-summary"><b id="link-count">—</b> 문서 간 연결</span></div>
+      <span class="live-badge"><i></i>탐색 중</span>
+    </div>
+
+    <section class="universe" id="universe" aria-label="별과 행성으로 표현한 3차원 업무 자료 지도">
+      <div id="scene" class="scene"></div>
+      <div class="scene-shade"></div>
+      <div id="labels" class="labels" aria-hidden="true"></div>
+      <div id="document-layer" class="document-layer" aria-label="가까운 문서"></div>
+      <div class="explorer-badge"><span class="explorer-dot"></span> 탐색 캐릭터 <span>뒤에서 따라보는 시점</span></div>
+      <button class="exit-immersive glass" id="exit-immersive" aria-label="일반 화면으로 돌아가기"><svg><use href="#i-expand"/></svg>일반 화면</button>
+
+      <div class="loading" id="loading" role="status"><div class="loading-orbit"></div><strong>자료 지도를 여는 중</strong><span>프로젝트와 문서를 배치합니다.</span></div>
+      <div class="render-error hidden" id="render-error" role="alert"><svg><use href="#i-orbit"/></svg><h2>3D 화면을 열 수 없습니다</h2><p id="error-message">WebGL을 지원하는 브라우저에서 다시 열어 주세요.</p></div>
+
+      <section class="control-panel glass" id="control-panel" aria-label="지도 표시 설정">
+        <button class="panel-heading" id="panel-toggle" aria-expanded="false" aria-controls="panel-body"><span><svg><use href="#i-tune"/></svg>표시 설정</span><span class="collapse-mark">+</span></button>
+        <div id="panel-body" class="hidden">
+          <div class="control-section"><label class="check-row"><span>프로젝트 빛 강조</span><input id="project-halo" type="checkbox" checked><span class="switch"></span></label><label class="check-row"><span>문서 빛 강조</span><input id="note-halo" type="checkbox" checked><span class="switch"></span></label><label class="check-row"><span>문서 간 연결 표시</span><input id="connections" type="checkbox" checked><span class="switch"></span></label></div>
+          <div class="control-section sliders"><label for="glow"><span>빛의 강도</span><output id="glow-value">65%</output></label><input id="glow" type="range" min="10" max="100" value="65"><label for="speed"><span>이동·회전 속도</span><output id="speed-value">1.0×</output></label><input id="speed" type="range" min="2" max="20" value="10"></div>
+          <label class="check-row rotate-row"><span>자동 회전</span><input id="auto-rotate" type="checkbox" checked><span class="switch"></span></label>
+          <div class="panel-foot"><span class="status-dot"></span>둘러보기 중 Esc로 종료</div>
+        </div>
+      </section>
+
+      <div class="legend"><span><i class="dot project-dot"></i>프로젝트</span><span><i class="dot note-dot"></i>문서</span><span><i class="line-icon"></i>문서 간 연결</span></div>
+
+      <div class="scene-caption"><div class="eyebrow">프로젝트와 문서를 한눈에</div><h2>업무 자료 지도</h2><p>행성은 프로젝트, 작은 점은 문서입니다.</p></div>
+
+      <div class="flight-controls glass"><button id="flight-button" aria-pressed="false"><svg><use href="#i-play"/></svg><span>둘러보기 시작</span></button><span class="flight-divider"></span><button id="focus-button" title="다음 프로젝트로 이동"><svg><use href="#i-target"/></svg><span>다음 프로젝트</span></button></div>
+      <div class="pilot-hud hidden" id="pilot-hud"><span id="pilot-status">둘러보는 중</span><span class="pilot-meter">속도 <b id="pilot-speed">0</b></span><span class="pilot-mouse-hint">마우스로 방향 전환</span><span class="pilot-drag-hint">드래그로 방향 전환</span></div>
+      <div class="reticle" id="reticle" aria-hidden="true"><span id="aim-name"></span></div>
+      <div class="pilot-guide"><span id="guide-action">화면 클릭: 둘러보기 시작</span><span id="guide-detail">드래그: 화면 회전 · 휠: 확대·축소</span></div>
+      <button id="restore-ui" class="restore-ui glass hidden">H · 메뉴 표시</button>
+
+      <aside class="detail-panel glass hidden" id="detail-panel" aria-label="선택한 프로젝트 정보">
+        <div class="detail-top"><span><i class="dot project-dot"></i>프로젝트</span><button class="icon-button" id="close-detail" aria-label="프로젝트 정보 닫기"><svg><use href="#i-close"/></svg></button></div>
+        <span class="detail-index" id="detail-index">01 / 14</span><h2 id="detail-name"></h2><p id="detail-description"></p>
+        <div class="detail-stats"><div><strong id="detail-notes"></strong><span>소속 문서</span></div><div><strong id="detail-links"></strong><span>문서 간 연결 수</span></div></div>
+        <div class="tag-list" id="detail-tags"></div><button class="detail-action" id="detail-focus">이 프로젝트로 이동<svg><use href="#i-arrow"/></svg></button>
+        <p class="sample-note">시각화 데모용 샘플 프로젝트입니다.</p>
+      </aside>
+      <aside class="document-panel glass hidden" id="document-panel" aria-label="문서 읽기">
+        <div class="document-panel-top"><span>문서 / 샘플 내용</span><button class="icon-button" id="close-document" aria-label="문서 닫기"><svg><use href="#i-close"/></svg></button></div>
+        <div id="document-project" class="document-project"></div><h2 id="document-title"></h2><div id="document-body"></div><div class="document-panel-foot">연결선을 따라 관련 문서를 찾아보세요.<small>화면에 표시되는 모든 내용은 시연용 모크 데이터입니다.</small></div>
+      </aside>
+
+      <div class="help-popover glass hidden" id="help-popover">
+        <strong>자료 지도 이용하기</strong>
+        <p class="help-description">행성은 프로젝트, 작은 점은 문서입니다. 가까이 가면 문서 카드가 나타납니다.</p>
+        <div class="help-section">둘러보기 전</div>
+        <p><kbd>화면 클릭</kbd><span>둘러보기 시작</span></p><p><kbd>드래그 / 휠</kbd><span>회전 / 확대·축소</span></p><p><kbd>우클릭 드래그</kbd><span>화면 위치 이동</span></p>
+        <div class="help-section">둘러보는 중</div>
+        <p><kbd>마우스 / 드래그</kbd><span>보는 방향 전환</span></p><p><kbd>W A S D</kbd><span>전후·좌우 이동</span></p><p><kbd>R / F</kbd><span>위 / 아래로 이동</span></p><p><kbd>Space 누르기</kbd><span>빠르게 이동</span></p><p><kbd>E</kbd><span>앞으로 짧게 이동</span></p><p><kbd>행성·문서 표식 클릭</kbd><span>내용 보기</span></p><p><kbd>빈 공간 클릭</kbd><span>선택한 방향으로 이동</span></p><p class="help-description">마우스가 화면에 고정되면 가운데 원으로 대상을 가리키고 클릭하세요.</p>
+        <div class="help-section">언제든 사용</div>
+        <p><kbd>문서 카드 클릭</kbd><span>문서 읽기</span></p><p><kbd>H</kbd><span>메뉴 숨김·표시</span></p><p><kbd>Esc</kbd><span>둘러보기 종료·메뉴 복원</span></p>
+        <p class="help-description help-sample">1,800개 문서 점 중 42개에 샘플 본문이 있습니다. 연결선은 문서 배치를 바탕으로 만든 예시입니다.</p>
+      </div>
+      <div class="toast" id="toast" role="status"></div>
+
+      <footer class="scene-footer"><span><span class="footer-cross">+</span> <span id="visible-count">1,814</span>개 항목 <span class="footer-separator">/</span> 샘플 자료</span><div class="footer-hint">조작 안내는 왼쪽 <span>?</span> 도움말</div><span class="performance"><i></i><span id="fps">—</span> FPS</span></footer>
+    </section>
+  </main>
+  <script type="module" src="./wiki-nav.js"></script>
+  <script type="module">
+    import('./app.js').catch(error => {
+      document.querySelector('#loading').classList.add('hidden');
+      document.querySelector('#render-error').classList.remove('hidden');
+      document.querySelector('#error-message').textContent = '3D 파일을 불러오지 못했습니다. 로컬 서버로 실행한 뒤 새로고침해 주세요.';
+      console.error(error);
+    });
+  </script>
+</body>
+</html>

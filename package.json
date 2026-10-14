@@ -1,0 +1,11 @@
+{
+  "name": "space-wiki-static-demo",
+  "version": "1.0.0",
+  "private": true,
+  "license": "MIT",
+  "type": "module",
+  "scripts": {
+    "start": "node server.mjs",
+    "check": "node --check app.js && node --check pilot.js && node --check astronaut.js && node --check documents.js && node --check wiki-nav.js && node --check server.mjs"
+  }
+}

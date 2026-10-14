@@ -1,0 +1,269 @@
+/* Final shared reading layer. World coordinates and interaction logic stay page-owned. */
+body { font-size:14px; color:var(--space-text); }
+body :is(button, input, textarea, select) { font-family:var(--space-font); }
+body :is(button, a, input, select, textarea, summary):focus-visible { outline:2px solid var(--space-accent); outline-offset:3px; }
+body :is(button, input, select, textarea):disabled { opacity:1; color:#94a7bc; cursor:not-allowed; }
+body button:disabled { background:#1b293b; border-color:#3e536a; box-shadow:none; }
+body ::selection { background:#bfdcf2; color:#122638; }
+body :is(.ai-main, .review-main, .review-inspector, .office-view, .inspector-scroll, .document-panel) { scrollbar-color:#6a819b #142132; scrollbar-width:thin; }
+
+/* The surrounding shell has the same hierarchy in Wiki and AI. */
+.space-header, body :is(.space-sidebar, .toolbar) { background:#101b2a; }
+body .space-header .header-service, body .space-context { font-size:13px; color:var(--space-muted); }
+body .header-context { background:var(--space-surface); border-color:#708aa5; border-left-color:var(--space-accent); }
+body #header-context-label, body .header-save-state { font-size:12px; color:#c1d0e0; }
+body .space-header #header-task { font-size:16px; }
+body .space-service { border-radius:7px; }
+body .space-service strong { font-size:14px; }
+body .space-service small { font-size:12px; color:var(--space-muted); }
+body .space-service[aria-current=page] { background:#21354b; border-color:#6883a0; color:var(--space-text); }
+body .sidebar-hint { font-size:12px; color:var(--space-muted); line-height:1.8; }
+body .sidebar-heading { font-size:12px; color:#aabbcf; font-weight:600; }
+body .space-menu-item>span { font-size:14px; }
+body .space-menu-item { color:#c7d6e6; min-height:44px; }
+body .space-menu-item:hover { background:#21334b; }
+body .space-menu-item.active { background:var(--space-active); border-color:#8cabc9; color:#f5f9fc; }
+body .space-menu-item small { font-size:11px; color:#e2ecf8; background:#314861; }
+body .sidebar-create { background:#1f334c; border-color:#66819e; color:#e2effc; }
+body[data-nav-compact=true] .space-menu-item>span, body[data-nav-compact=true] .space-service strong { font-size:12px; }
+body[data-nav-compact=true] .space-menu-item small { font-size:10px; }
+
+/* Buttons and fields use a stronger edge than decorative dividers. */
+body.ai-page .primary-button, body.wiki-page .detail-action { background:var(--space-primary); color:var(--space-on-primary); border:1px solid #d7eafa; font-weight:650; box-shadow:none; }
+body.ai-page .primary-button:disabled { background:#26374a; color:#a3b5c8; border-color:#597088; cursor:not-allowed; }
+body.ai-page .primary-button:hover:not(:disabled), body.wiki-page .detail-action:hover { background:#daecf9; color:#11273a; }
+body.ai-page .secondary-button { background:var(--space-raised); border-color:var(--space-control-line); color:#e1ebf5; }
+body.ai-page .secondary-button:hover:not(:disabled) { background:#30465f; border-color:#a3bad0; }
+body.ai-page :is(.primary-button, .secondary-button) { font-size:13px; min-height:40px; line-height:1.5; }
+body.ai-page .text-button { font-size:13px; color:var(--space-accent); }
+body :is(.icon-button, .sidebar-toggle) { color:#c2d3e6; min-width:32px; min-height:32px; }
+body.ai-page :is(input[type=text], input[type=search], textarea, select) { font-size:14px; color:var(--space-text); border-color:var(--space-control-line); background:var(--space-control); line-height:1.6; }
+body.ai-page :is(textarea, input)::placeholder { color:#a9bbce; opacity:1; }
+body.ai-page :is(input[type=checkbox], input[type=range]) { accent-color:#b7d5f0; }
+body.ai-page input[type=checkbox] { width:16px; height:16px; flex-shrink:0; }
+body.ai-page .eyebrow { font-size:12px; color:#b6c9dd; font-weight:550; letter-spacing:.15px; }
+body.ai-page :is(.page-heading p, .review-heading p, .structure-summary, .welcome-description, .office-heading p) { font-size:14px; color:var(--space-muted); line-height:1.8; }
+body.ai-page :is(.page-heading h1, .review-heading h1, .structure-toolbar h1, .office-heading h1) { font-weight:650; color:var(--space-text); letter-spacing:-.6px; }
+
+/* Request composer and examples. */
+body.ai-page .composer { background:var(--space-surface); border-color:var(--space-control-line); box-shadow:0 8px 24px #0002; }
+body.ai-page .composer:focus-within { border-color:var(--space-accent); box-shadow:0 0 0 2px #b9dcf62b; }
+body.ai-page .composer textarea { font-size:15px; line-height:1.8; background:transparent; }
+body.ai-page .composer-toolbar { background:#1d2e42; border-color:var(--space-line); flex-wrap:wrap; }
+body.ai-page :is(.composer-note, .keyboard-hint, .wiki-pick, .section-label>span, .pill-demo) { font-size:12px; color:#b9c9d9; line-height:1.7; }
+body.ai-page :is(.ready-pill, .mode-label select) { font-size:12px; color:#d3e0ed; background:var(--space-surface); }
+body.ai-page .ready-pill { border-color:var(--space-line); }
+body.ai-page .prompt-list button { font-size:12px; color:#d3e1ef; background:var(--space-surface); border-color:#607891; min-height:36px; }
+body.ai-page .recent-row { background:var(--space-surface); border:1px solid var(--space-line); }
+body.ai-page .recent-copy strong { font-size:14px; color:var(--space-text); }
+body.ai-page :is(.recent-copy small, .recent-state, .reference-card small, .source-link) { font-size:12px; color:var(--space-muted); }
+body.ai-page .reference-card { background:var(--space-raised); border-color:#6a819c; }
+body.ai-page .reference-card strong { font-size:14px; }
+body.ai-page :is(.demo-guide, .demo-launcher, .demo-scenario) { border-color:var(--space-line); }
+body.ai-page .demo-guide { background:#1c3042; }
+body.ai-page :is(.demo-guide p, .demo-scenario p, .demo-launcher>p) { font-size:13px; color:#c3d2e0; }
+body.ai-page .demo-guide-head strong, body.ai-page .demo-scenario strong { font-size:15px; }
+body.ai-page :is(.demo-guide ol, .demo-guide-head span) { font-size:12px; color:#b9cada; }
+
+/* List boxes have clear row separators and visible selection. */
+body.ai-page :is(.queue-panel, .metric-strip, .file-card, .review-rows, .current-step, .evidence-card, .node-metrics) { background:var(--space-surface); border-color:var(--space-line); }
+body.ai-page .metric { border-color:var(--space-line); }
+body.ai-page .metric span, body.ai-page .metric small { font-size:12px; color:var(--space-muted); line-height:1.6; }
+body.ai-page .metric strong { color:#edf4fb; font-size:28px; }
+body.ai-page :is(.queue-row, .queue-columns) { grid-template-columns:minmax(0,1fr) 96px 62px 70px 16px; }
+body.ai-page .queue-row { background:var(--space-surface); border-color:var(--space-line); min-height:92px; }
+body.ai-page .queue-row:hover { background:var(--space-raised); }
+body.ai-page .queue-row strong { font-size:14px; color:var(--space-text); }
+body.ai-page :is(.queue-row small, .queue-row time, .queue-columns, .queue-filters button, .panel-heading, .panel-heading span, .queue-total, .queue-row>span, .queue-search input) { font-size:12px; color:var(--space-muted); }
+body.ai-page .queue-filters { border-color:var(--space-line); background:#121f2f; }
+body.ai-page .queue-filters button.active { color:#e7f3ff; border-color:var(--space-accent); }
+body.ai-page .state-badge { font-size:12px; font-weight:550; white-space:nowrap; }
+body.ai-page .state-badge.review { color:#ffe0a6; background:#3b3021; border-color:#9b8157; }
+body.ai-page .state-badge.complete { color:#b6eed8; background:#1d3d37; border-color:#679b89; }
+body.ai-page .state-badge.running { color:#c4e2ff; background:#263e5b; border-color:#7699bc; }
+body.ai-page .state-badge.failed { color:#ffd1c5; background:#452d2e; border-color:#b78276; }
+body.ai-page .state-badge.revision { color:#e8d5ff; background:#382d48; border-color:#aa8ac2; }
+
+body.ai-page .queue-summary { background:var(--space-surface); border-color:var(--space-line); }
+body.ai-page :is(.queue-summary>p, .summary-flow>span, .attention-note p, .queue-footer) { font-size:13px; line-height:1.8; color:var(--space-muted); }
+body.ai-page :is(.summary-flow i, .queue-filters button span, .urgent-label) { font-size:11px; color:#c3d3e3; }
+
+/* Review: readable source/result blocks, brighter criteria and decision box. */
+body.ai-page .review-breadcrumb { font-size:12px; color:var(--space-muted); border-color:var(--space-line); gap:14px; line-height:1.6; flex-wrap:wrap; }
+body.ai-page .review-breadcrumb :is(.complete-step, .selected-step) { color:#c9e0ef; font-size:12px; }
+body.ai-page .review-case { background:#223750; border-color:#7a95b1; padding:15px 16px; gap:8px 12px; }
+body.ai-page .review-case>strong { font-size:14px; font-weight:600; color:#f0f6fc; }
+body.ai-page :is(.file-card small, .file-count, .review-tablebar small, .diff-legend, .review-footnote) { font-size:12px; color:var(--space-muted); line-height:1.8; }
+body.ai-page .file-card strong { font-size:14px; color:#e6f1fa; }
+body.ai-page .file-icon { background:#2c514b; color:#d0f0df; }
+body.ai-page .segmented { background:#111c2b; border:1px solid #647d97; }
+body.ai-page .segmented button { font-size:12px; padding:7px 10px; color:#bacbdd; }
+body.ai-page .segmented button.active { background:#34516c; color:#f4f8fc; }
+body.ai-page .diff-row { padding:20px 18px; border-color:#4b6077; background:#172436; gap:14px; }
+body.ai-page .diff-row:nth-child(even) { background:#1c2b3e; }
+body.ai-page .diff-row:hover { background:#263c55; }
+body.ai-page .diff-row.current-case { background:#233b54; box-shadow:inset 3px 0 var(--space-accent); }
+body.ai-page .diff-legend span:last-child { opacity:1; color:var(--space-muted); }
+body.ai-page .diff-legend span:first-child i { background:#deb7c0; }
+body.ai-page .diff-legend span:nth-child(2) i { background:#b6eed8; }
+body.ai-page .diff-row svg { width:16px; height:16px; color:#afc5da; }
+body.ai-page .row-meta, body.ai-page .row-meta b { font-size:12px; color:#c0d1e3; line-height:1.7; }
+body.ai-page .row-content, body.ai-page .diff-row.demo-result .row-content { font-size:15px; line-height:1.9; }
+body.ai-page .row-content del { display:block; color:#deb7c0; text-decoration-color:#b8919d; background:transparent; margin:0 0 8px; }
+body.ai-page .row-content ins { display:block; color:#e2f1e8; }
+body.ai-page .review-rows.split .row-content del { margin:0; }
+body.ai-page :is(.inspector, .review-inspector, .structure-detail) { background:var(--space-surface); border-color:var(--space-line); }
+body.ai-page .review-inspector { width:320px; padding:26px 22px; }
+body.ai-page .inspector-intro { font-size:13px; color:var(--space-muted); line-height:1.8; }
+body.ai-page .insight { background:#162336; border-color:#637994; padding:16px 13px; }
+body.ai-page .insight:has(input:checked) { background:#273e58; border-color:#a0bad3; }
+body.ai-page .insight strong { font-size:14px; color:#f1f6fb; line-height:1.7; }
+body.ai-page .insight small { font-size:13px; color:#c1cfdf; line-height:1.8; }
+body.ai-page .insight em { font-size:12px; color:#b3c7dd; }
+body.ai-page :is(#insight-count, #applied-status) { font-size:12px; color:#c1d0e0; line-height:1.8; }
+body.ai-page .decision-box { border:1px solid #708ba5; background:#21354a; border-radius:8px; padding:17px 14px; }
+body.ai-page .decision-box>p { font-size:14px; color:#d1dfec; line-height:1.8; }
+body.ai-page .decision-box small { font-size:12px; color:#b8cadc; line-height:1.7; }
+
+/* Diagram detail remains readable while nodes keep their world coordinates. */
+body.ai-page :is(.case-heading, .run-statusbar, .trace-player, .trace-summary) { background:var(--space-surface); border-color:var(--space-line); }
+body.ai-page .case-heading h1 { font-size:17px; font-weight:600; }
+body.ai-page :is(.run-progress strong, .run-meta, .subtle-button, .trace-player button, .trace-player select) { font-size:12px; color:#c8d9eb; }
+body.ai-page :is(.trace-caption, .trace-summary, .trace-player output, #step-count, .graph-legend, .node-stat) { font-size:11px; color:#b3c5d9; }
+body.ai-page .trace-summary { min-height:34px; }
+body.ai-page .graph-node { background:#1e3044; border-color:#768ca5; min-height:94px; padding-bottom:29px; }
+body.ai-page .graph-node .node-copy strong { font-size:13px; color:#edf5fc; }
+body.ai-page .graph-node .node-copy small { font-size:11px; color:#bfd0e2; white-space:normal; line-height:1.5; }
+body.ai-page .graph-node.selected { background:#2d4b69; border-color:#c4e3fb; box-shadow:0 0 0 2px #b9dcf640; }
+body.ai-page .graph-node.done { background:#1e3939; border-color:#739a94; }
+body.ai-page .graph-node.failed { background:#432d32; border-color:#d4998c; }
+body.ai-page .graph-lane { border-color:#506782; }
+body.ai-page .graph-lane>span { font-size:12px; color:#b4c7df; letter-spacing:.25px; }
+body.ai-page :is(.inspector-tabs button, .node-metrics span, .log-row, .log-row time) { font-size:12px; color:#b9cce0; }
+body.ai-page :is(.current-step p, .evidence-card p, .run-alert) { font-size:13px; line-height:1.8; color:#d2dfed; }
+body.ai-page .run-alert { background:#382c21; border-color:#ac875c; color:#f0d4ad; }
+
+body.ai-page :is(.node-source, .review-notice) { font-size:12px; color:#b8cadd; line-height:1.7; }
+body.ai-page .graph-legend span, body.ai-page .graph-tools button { color:#c7d8e9; }
+
+/* Office controls and activity records sit outside the scaled room. */
+body.ai-page :is(.office-stage, .office-detail, .office-team-controls, .office-staff-controls, .office-ledger) { background:var(--space-surface); border-color:#6a849b; }
+body.ai-page :is(.office-toolbar label, .office-toolbar select, .office-team-controls, .office-team-controls select, .office-team-controls p, .office-staff-controls label, .office-staff-controls p) { font-size:13px; color:#cad9e7; line-height:1.7; }
+body.ai-page :is(.office-demo, .office-stage-top, .office-stage-top strong, .office-player button, .office-player output, .office-legend, .office-detail small, .office-ledger-heading span) { font-size:12px; color:#b9cedf; }
+body.ai-page :is(.office-map-tools, .office-player, .office-detail-heading, .office-ledger-heading) { background:#203449; border-color:#57728c; }
+body.ai-page :is(.office-assignment p, .office-reason p, #office-worker-description, .office-activity p) { font-size:14px; color:#d4e0eb; line-height:1.8; }
+body.ai-page .office-roster button { font-size:13px; color:#d9e6f2; background:#21364a; border-color:#638199; }
+body.ai-page .office-roster button[aria-pressed=true] { background:#345570; border-color:#b7d6eb; }
+body.ai-page :is(.office-ledger li, .office-ledger li span, .office-ledger li strong) { font-size:13px; line-height:1.8; color:#ccdae8; }
+body.ai-page .office-ledger li { border-color:#455f77; }
+body.ai-page .office-ledger time { font-size:12px; color:#b4c8dc; }
+body.ai-page .office-counts span { font-size:12px; color:#b8cee1; }
+
+body.ai-page :is(.office-activity strong, .office-roster-heading) { font-size:14px; }
+body.ai-page :is(.office-statebar, .office-touch-hint, .office-stage-top>.office-touch-hint, .office-roster-heading span, #office-facts>div, #office-facts span, .office-activity-tag, .office-map-tools button) { font-size:12px; color:#bed0e1; }
+body.ai-page .office-statebar { border-color:var(--space-line); }
+
+/* Reasoning diagram: brighter layers and readable selected evidence. */
+body.ai-page .memory-layer { border-color:#637d9c; background:#1c2d42; }
+body.ai-page .memory-tile { font-size:11px; color:#ceddec; background:#293f59; border-color:#6b85a3; }
+body.ai-page .memory-tile.related { color:#e6f2fd; background:#36536e; border-color:#9fbacf; }
+body.ai-page .memory-tile.selected { color:#122a3e; background:#bfdcf0; border-color:#e0f0fa; }
+body.ai-page :is(.layer-label, .layer-label b, .layer-label small, .version-tabs button) { font-size:12px; color:#c1d3e6; }
+body.ai-page :is(.structure-detail p, .evidence-list li, .structure-note) { font-size:13px; color:#c8d7e7; line-height:1.8; }
+body.ai-page .evidence-list li { border-color:var(--space-line); }
+body.ai-page .version-tabs { border-color:#617991; background:#1b2b3f; }
+
+body.ai-page .structure-note>span { font-size:12px; color:#aec3d9; }
+body.ai-page .version-tabs button.active { background:#34516c; color:#f4f8fc; box-shadow:none; }
+
+/* Operations already has a reading layout; match its borders and surfaces. */
+#view-ops .ops-row { border-bottom-color:var(--space-line); }
+#view-ops .ops-row[aria-pressed=true] { background:var(--space-active); border-left-color:var(--space-accent); }
+#view-ops .ops-detail { background:var(--space-surface); border:1px solid #607b95; border-radius:8px; padding:22px; }
+#view-ops :is(.ops-current p, .ops-next p) { color:#cfdeed; }
+#view-ops :is(.ops-stages p, .ops-footnote) { color:#b4c6d8; }
+
+/* Wiki reading panels use near-opaque surfaces over the moving universe. */
+body.wiki-page .glass { background:var(--space-panel); border-color:#6a849d; box-shadow:0 10px 28px #0005; }
+body.wiki-page .toolbar { min-height:54px; height:auto; padding-block:8px; gap:18px; }
+body.wiki-page :is(.filter, .summary, .live-badge, .map-location, .map-location strong, .legend) { font-size:12px; color:#c2d2e3; }
+body.wiki-page .filter.active { color:#f0f7ff; background:#2c4b64; box-shadow:inset 0 0 0 1px #83a7c3; }
+body.wiki-page .control-panel { width:224px; }
+body.wiki-page :is(.panel-heading, .check-row, .sliders label) { font-size:13px; color:#d1dfec; }
+body.wiki-page .check-row { min-height:34px; }
+body.wiki-page :is(.panel-foot, .detail-panel small, .document-panel-foot, .help-section) { font-size:12px; color:#b7cadd; line-height:1.7; }
+body.wiki-page .document-panel { width:350px; }
+body.wiki-page :is(.document-panel p, .detail-panel p) { font-size:14px; color:#d2dfec; line-height:1.9; }
+body.wiki-page :is(.document-project, .document-panel-top, .tag-list span) { font-size:12px; color:#c0d4e7; letter-spacing:.2px; }
+body.wiki-page .space-document { width:218px; background:#152637f5; border-color:#7c9baf; border-left-color:#bfdfde; }
+body.wiki-page .space-document.near { width:254px; }
+body.wiki-page .space-document strong { font-size:14px; color:#f1f6fa; }
+body.wiki-page :is(.document-meta, .space-document.near .document-excerpt, .space-document.near .document-foot) { font-size:12px; color:#c0d3df; line-height:1.7; }
+body.wiki-page .help-popover { width:min(360px,calc(100% - 32px)); }
+body.wiki-page :is(.help-popover p, .help-popover .help-description, .help-popover .help-sample) { font-size:12px; color:#c7d7e6; line-height:1.8; }
+
+body.wiki-page :is(.scene-caption p, .flight-controls button, .pilot-guide, .scene-footer, .footer-hint, .performance, .detail-stats span, .sample-note, .explorer-badge, .explorer-badge>span:last-child) { font-size:12px; color:#c2d2e3; line-height:1.7; }
+body.wiki-page .scene-caption { background:#132233e8; border:1px solid #526b83; border-radius:8px; padding:16px 18px; }
+body.wiki-page .scene-caption .eyebrow { font-size:11px; color:#b6cde0; letter-spacing:.5px; }
+body.wiki-page:has(#panel-toggle[aria-expanded=true]) .scene-caption { visibility:hidden; }
+body.wiki-page .scene-caption h2 { margin:8px 0; }
+body.wiki-page :is(.pilot-guide, .flight-controls) { background:#112132f2; border:1px solid #718ba3; }
+body.wiki-page .scene-footer { background:#101c2af5; border-color:#526b83; }
+body.wiki-page .explorer-badge { background:#142336ed; border:1px solid #526b83; padding:5px 10px; border-radius:20px; letter-spacing:0; }
+body.wiki-page .project-label { font-size:11px; color:#d2e2f0; text-shadow:0 1px 4px #000, 0 1px 8px #000; }
+body.wiki-page .detail-action { font-size:13px; }
+
+/* Dialogs use the same field and reading hierarchy. */
+body.ai-page dialog { background:#1a293d; border-color:#90aac4; color:#e7eff8; box-shadow:0 20px 70px #0008; }
+body.ai-page dialog :is(p, label, li) { font-size:13px; color:#c5d5e6; line-height:1.8; }
+body.ai-page dialog textarea { font-size:15px; background:#101e30; border-color:#819bb5; line-height:1.8; padding:14px; }
+body.ai-page dialog .dialog-heading h2 { font-size:20px; color:#eef6ff; }
+body.ai-page #source-dialog blockquote { font-size:15px; color:#e1edf7; background:#112035; border-left-color:#a4c9e4; }
+body.ai-page #source-requirements li, body.ai-page .source-policy { font-size:13px; color:#c5d7e9; }
+
+@media(max-width:1100px) {
+  body.ai-page .review-view { display:block; overflow:auto; }
+  body.ai-page .review-main { overflow:visible; }
+  body.ai-page .review-inspector { width:100%; border-left:0; border-top:1px solid var(--space-line); }
+  body.ai-page .insight-list { display:grid; grid-template-columns:repeat(auto-fit,minmax(200px,1fr)); }
+}
+@media(max-width:850px) {
+  body.ai-page :is(.queue-row, .queue-columns) { grid-template-columns:minmax(0,1fr) 96px 60px; }
+  body.ai-page .queue-row>:nth-child(4), body.ai-page .queue-columns>:nth-child(4), body.ai-page .queue-row>:nth-child(5), body.ai-page .queue-columns>:nth-child(5) { display:none; }
+  body.ai-page .queue-layout { grid-template-columns:minmax(0,1fr); }
+  body.ai-page .case-heading { flex-wrap:wrap; }
+  body.wiki-page .control-panel { width:210px; }
+}
+@media(max-width:600px) {
+  body .space-header #header-task { font-size:15px; }
+  body #header-context-label, body .header-save-state { font-size:11px; }
+  body.ai-page :is(.review-heading, .office-heading) { flex-wrap:wrap; }
+  body.ai-page .review-content { padding:22px 14px; }
+  body.ai-page .review-case { align-items:flex-start; }
+  body.ai-page .review-case>strong { white-space:normal; overflow-wrap:anywhere; }
+  body.ai-page .review-inspector { padding:22px 14px; }
+  body.ai-page .insight-list { display:flex; flex-direction:column; }
+  body.ai-page .review-tablebar { flex-wrap:wrap; gap:10px; }
+  body.ai-page .diff-row { padding:16px 12px; gap:10px; }
+  body.ai-page .row-meta { width:35px; }
+  body.ai-page .row-content, body.ai-page .diff-row.demo-result .row-content { font-size:14px; }
+  body.ai-page .review-rows.split .row-content { grid-template-columns:minmax(0,1fr); gap:12px; }
+  body.ai-page .page-heading { flex-wrap:wrap; }
+  body.ai-page .page-heading>div { flex-basis:100%; }
+  body.ai-page .composer textarea { min-height:180px; }
+  body.ai-page .composer-toolbar .keyboard-hint { display:none; }
+  body.ai-page :is(.queue-row, .queue-columns) { grid-template-columns:minmax(0,1fr) 88px; padding-inline:12px; gap:10px; }
+  body.ai-page .queue-row>:nth-child(n+3), body.ai-page .queue-columns>:nth-child(n+3) { display:none; }
+  body.ai-page .trace-caption { display:none; }
+  body.ai-page .trace-summary { flex-direction:column; gap:4px; }
+  body.ai-page .trace-summary>span { white-space:normal; }
+  body.ai-page .office-toolbar, body.ai-page .office-team-controls { flex-wrap:wrap; }
+  body.ai-page :is(.office-map-tools button, .office-player button, .office-map-tools select) { font-size:12px; }
+  #view-ops .ops-detail { padding:17px; }
+  body.wiki-page .toolbar { gap:10px; padding-inline:12px; }
+  body.wiki-page .filter { font-size:12px; padding:7px 9px; }
+  body.wiki-page .control-panel { width:190px; }
+  body.wiki-page .document-panel { width:auto; }
+  body.wiki-page .space-document { width:195px; }
+  body.wiki-page .space-document.near { width:224px; }
+}
