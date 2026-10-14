@@ -2,6 +2,12 @@
 
 개인정보와 실제 업무 데이터를 포함하지 않는 3D Wiki 화면 시연 패키지입니다. 프로젝트, 문서, 연결 관계와 본문은 모두 모크 데이터이며 외부 API, 계정 인증, AI 작업실, ERP 기능을 사용하지 않습니다.
 
+## 데모 영상
+
+[![Space Wiki 3D 데모 화면](docs/space-wiki-demo-poster.png)](docs/space-wiki-demo.mp4)
+
+[MP4 데모 영상 보기](docs/space-wiki-demo.mp4) · 28초 · 1280×720 · 무음
+
 ## 실행
 
 Node.js가 설치된 환경에서 이 폴더를 열고 다음 명령을 실행합니다.
